@@ -1,0 +1,89 @@
+
+
+
+
+//pod 'Alamofire', '~> 4.7'
+//pod 'AlamofireObjectMapper'
+//pod 'ObjectMapper'
+
+
+let apiUrl = ""
+let header = ["Authorization" : "" ]
+
+print(apiUrl)
+print(header)
+
+Alamofire.request(apiUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header ).responseArray { (response: DataResponse<[UserDetail]>) in
+    
+    //self.topUserList = response.result.value as! NSArray
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import UIKit
+import ObjectMapper
+import Alamofire
+import AlamofireObjectMapper
+import CoreData
+
+class UserDetail: Mappable {
+    
+    var userId: String?
+    var name: String?
+    var image_url: UserImages?
+    var email: String?
+    var isVerified = false
+    var desc: String?
+    var followerCount = 0
+    var followingCount = 0
+    var rating = 0
+    var ranking  = 0
+    var isFollowed = false
+    var countryFlag : String?
+    var location : ItemLocation?
+    
+    required init?(map: Map) {
+        //mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        countryFlag <- map["flag"]
+        userId <- map["user_id"]
+        DataManager.rUserId = Int(userId!)   // ramneet
+        name <- map["name"]
+        image_url <- map["user_images"]
+        email <- map["email"]
+        desc <- map["description"]
+        isVerified <- map["isVerified"]
+        followerCount <- map["followingCount"]
+        followingCount <- map["followerCount"]
+        rating <- map["rating"]
+        ranking <- map["ranking"]
+        isFollowed <- map["isFollowed"]
+        location <- map["location"]
+        
+    }
+    
+    
+    class func getUserProfileWithId(userId : String, completion: @escaping (_ result: User_Detail) -> Void) {
+        let userSession = CoreDataOperations.fetchUserSessionObj()
+        if let token = userSession?.token
+        {
+        
+        
+        
+        }
+        
+        }
